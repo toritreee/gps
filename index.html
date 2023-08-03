@@ -1,0 +1,28 @@
+<p>あなたはいま</p>
+<p id="loc" class="position"></p>
+<p>の場所にいます。ちなみに精度は半径 <span id="accuracy" class="position"></span> mです。</p>
+<button onclick="gett">get</button>
+<script>
+  const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+function success(pos) {
+  const crd = pos.coords;
+
+  console.log("Your current position is:");
+  console.log(`Latitude : ${crd.latitude}`);
+  console.log(`Longitude: ${crd.longitude}`);
+  console.log(`More or less ${crd.accuracy} meters.`);
+  document.getElementById("loc").textContent = `Latitude : ${crd.latitude} Longitude: ${crd.longitude} More or less ${crd.accuracy} meters.`
+}
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+function gett(){
+  navigator.geolocation.getCurrentPosition(success, error, options);
+}
+</script>
